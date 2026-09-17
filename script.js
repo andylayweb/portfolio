@@ -80,3 +80,29 @@ wa.addEventListener("submit", function (e) {
 
   window.open(url, "_blank");
 });
+
+// SLIDER
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelectorAll(".mySlider").forEach((slider) => {
+    let index = 0;
+    const items = slider.querySelectorAll(".slide-item");
+    if (items.length === 0) return;
+    const show = (n) => {
+      items.forEach((i) => (i.style.display = "none"));
+      items[n].style.display = "block";
+    };
+    slider.querySelector(".prev").onclick = () => {
+      index = (index - 1 + items.length) % items.length;
+      show(index);
+    };
+    slider.querySelector(".next").onclick = () => {
+      index = (index + 1) % items.length;
+      show(index);
+    };
+    setInterval(() => {
+      index = (index + 1) % items.length;
+      show(index);
+    }, 3500);
+    show(0);
+  });
+});
